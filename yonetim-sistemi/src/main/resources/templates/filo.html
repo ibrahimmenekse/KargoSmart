@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Filo ve Kuryeler - KargoSmart</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#767683", "on-secondary-fixed-variant": "#005046", "tertiary-fixed": "#ffdbd0", "on-surface": "#1a1c1c", "inverse-on-surface": "#f1f1f1", "on-tertiary": "#ffffff", "surface-container-high": "#e8e8e8", "primary": "#000666", "surface-container-lowest": "#ffffff", "surface-variant": "#e2e2e2", "on-primary-fixed": "#000767", "tertiary-fixed-dim": "#ffb59d", "error-container": "#ffdad6", "tertiary": "#380b00", "secondary-container": "#9defde", "inverse-primary": "#bdc2ff", "inverse-surface": "#2f3131", "surface-dim": "#dadada", "on-primary": "#ffffff", "error": "#ba1a1a", "background": "#f9f9f9", "on-error": "#ffffff", "on-secondary": "#ffffff", "surface": "#f9f9f9", "surface-bright": "#f9f9f9", "tertiary-container": "#5c1800", "on-primary-fixed-variant": "#343d96", "on-background": "#1a1c1c", "on-secondary-container": "#0f6f62", "on-tertiary-fixed-variant": "#7b2e12", "secondary": "#046b5e", "primary-fixed-dim": "#bdc2ff", "surface-container-highest": "#e2e2e2", "secondary-fixed-dim": "#84d5c5", "on-surface-variant": "#454652", "on-tertiary-fixed": "#390c00", "surface-container": "#eeeeee", "on-primary-container": "#8690ee", "surface-tint": "#4c56af", "on-tertiary-container": "#e17c5a", "on-error-container": "#93000a", "primary-container": "#1a237e", "secondary-fixed": "#a0f2e1", "outline-variant": "#c6c5d4", "primary-fixed": "#e0e0ff", "on-secondary-fixed": "#00201b", "surface-container-low": "#f3f3f3"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "stack-sm": "0.5rem", "container-padding": "2rem", "stack-md": "1rem", "gutter": "1.5rem", "sidebar-width": "280px", "stack-lg": "2rem" },
+                    "fontFamily": { "h3": ["Inter"], "data-tabular": ["Inter"], "body-lg": ["Inter"], "label-sm": ["Inter"], "h2": ["Inter"], "h1": ["Inter"], "body-md": ["Inter"] },
+                    "fontSize": { "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }], "data-tabular": ["14px", { "lineHeight": "1", "fontWeight": "500" }], "body-lg": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }], "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }], "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }], "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+    <!-- SideBar Navigation -->
+    <nav class="bg-primary dark:bg-slate-950 font-['Inter'] text-sm tracking-tight fixed left-0 top-0 h-full w-72 z-50 border-r border-white/10 shadow-2xl flex flex-col p-4 space-y-2 overflow-y-auto">
+        <div class="flex items-center space-x-3 px-4 py-6 mb-4">
+            <div class="h-10 w-10 bg-white rounded-lg flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-primary filled" style="font-size: 24px;">local_shipping</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-xl font-bold text-white tracking-widest leading-none">KargoSmart</span>
+                <span class="text-[10px] text-white/70 uppercase tracking-widest mt-1">Global Command Center</span>
+            </div>
+        </div>
+
+        <div class="flex-1 space-y-1">
+            <a th:href="@{/}" class="text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg">
+                <span class="material-symbols-outlined mr-3 text-[20px]">dashboard</span>
+                Panel
+            </a>
+            <a th:href="@{/gonderiler}" class="text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg">
+                <span class="material-symbols-outlined mr-3 text-[20px]">local_shipping</span>
+                Gönderiler
+            </a>
+            <a th:href="@{/filo}" class="bg-white/10 text-white border-l-4 border-secondary font-semibold transition-all duration-200 ease-in-out flex items-center px-4 py-3 rounded-r-lg hover:bg-white/20">
+                <span class="material-symbols-outlined mr-3 text-[20px]">two_wheeler</span>
+                Filo ve Kuryeler
+            </a>
+            <a th:href="@{/subeler}" class="text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg">
+                <span class="material-symbols-outlined mr-3 text-[20px]">location_city</span>
+                Şubeler
+            </a>
+            <a th:href="@{/musteriler}" class="text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg">
+                <span class="material-symbols-outlined mr-3 text-[20px]">person</span>
+                Müşteriler
+            </a>
+        </div>
+
+        <div class="mt-auto pt-4 border-t border-white/10 space-y-1">
+            <button class="w-full text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg text-left">
+                <span class="material-symbols-outlined mr-3 text-[20px]">help</span>
+                Destek
+            </button>
+            <a th:href="@{/giris}" class="w-full text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 ease-in-out flex items-center px-4 py-3 border-l-4 border-transparent rounded-r-lg">
+                <span class="material-symbols-outlined mr-3 text-[20px]">logout</span>
+                Çıkış Yap
+            </a>
+        </div>
+    </nav>
+
+  </div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] flex-1 flex flex-col min-h-[1024px]" data-stitch-vh="min-h-[1024px]===min-h-screen">
+<!-- Top Navigation Bar -->
+    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md font-['Inter'] font-medium fixed top-0 right-0 w-[calc(100%-18rem)] h-16 z-40 border-b border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between px-8 max-md:w-full max-md:left-0">
+        <div class="flex items-center space-x-6 max-md:flex-1">
+            <h1 class="text-lg font-black text-primary dark:text-white">Filo ve Kuryeler</h1>
+            <div class="hidden lg:flex items-center relative w-64">
+                <span class="material-symbols-outlined absolute left-3 text-slate-400 text-[18px]">search</span>
+                <input class="w-full pl-10 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-md text-sm focus:ring-2 focus:ring-primary" placeholder="Kuryeler arayın..." type="text"/>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg p-2 transition-colors duration-150">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg p-2 transition-colors duration-150">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+            <span class="text-sm font-semibold text-on-surface dark:text-white mr-3 hidden sm:block">Muhammed İbrahim Menekşe</span>
+            <div class="ml-4 rounded-full bg-slate-300 overflow-hidden border border-slate-200 h-10 w-10">
+                <img alt="Admin Profili" class="h-full w-full object-cover" src="https://ui-avatars.com/api/?name=KargoSmart&background=0D8ABC&color=fff"/>
+            </div>
+        </div>
+    </header>
+<!-- Page Content -->
+<div class="mt-16 p-container-padding flex-1 overflow-auto">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-1">Filo ve Kuryeler</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Aktif filonuzu yönetin, kurye durumunu takip edin ve operasyonel verimliliği izleyin.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 border border-outline rounded-lg flex items-center gap-2 text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="font-label-sm text-label-sm uppercase">Filtrele</span>
+</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg flex items-center gap-2 hover:bg-primary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="font-label-sm text-label-sm uppercase">Yeni Kurye Ekle</span>
+</button>
+</div>
+</div>
+<!-- Fleet Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<!-- Metric Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aktif Kuryeler</h3>
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+</div>
+<div>
+<div class="font-h1 text-h1 text-on-surface">142</div>
+<div class="flex items-center gap-1 mt-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+12% geçen haftaya göre</span>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -bottom-6 -right-6 w-24 h-24 bg-secondary-fixed opacity-20 rounded-full blur-xl"></div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Müsait (Bekleyen)</h3>
+<span class="material-symbols-outlined text-outline">hourglass_empty</span>
+</div>
+<div>
+<div class="font-h1 text-h1 text-on-surface">28</div>
+<div class="flex items-center gap-1 mt-1 text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Optimum aralık: 15-30</span>
+</div>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Ortalama Teslimat Süresi</h3>
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<div>
+<div class="font-h1 text-h1 text-on-surface">42<span class="text-h3 font-h3 text-on-surface-variant ml-1">dk</span></div>
+<div class="flex items-center gap-1 mt-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="font-label-sm text-label-sm">-4 dakikalık iyileştirme</span>
+</div>
+</div>
+<div class="absolute -bottom-6 -right-6 w-24 h-24 bg-primary-fixed opacity-20 rounded-full blur-xl"></div>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant flex flex-col justify-between relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Kritik Uyarılar</h3>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div>
+<div class="font-h1 text-h1 text-error">3</div>
+<div class="flex items-center gap-1 mt-1 text-error">
+<span class="font-label-sm text-label-sm">Acil müdahale gerektirir</span>
+</div>
+</div>
+<div class="absolute -bottom-6 -right-6 w-24 h-24 bg-error-container opacity-20 rounded-full blur-xl"></div>
+</div>
+</div>
+<!-- Main Data Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Fleet List (2/3 width on lg) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-surface-variant flex justify-between items-center bg-surface-bright">
+<h2 class="font-h3 text-h3 text-on-surface">Canlı Filo Durumu</h2>
+<div class="flex gap-2">
+<button class="p-1.5 bg-surface-container text-on-surface rounded hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-sm">view_list</span></button>
+<button class="p-1.5 text-outline hover:bg-surface-container rounded transition-colors"><span class="material-symbols-outlined text-sm">grid_view</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-variant">
+<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kurye / Sürücü</th>
+<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Durum</th>
+<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Araç Tipi</th>
+<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Konum / Bölge</th>
+<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Aksiyon</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-label-sm text-label-sm font-bold">YA</div>
+<div>
+<div class="font-data-tabular text-data-tabular text-on-surface">Yakup Aslan</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">ID: FL-2041</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container">
+                                            Görevde
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+<span class="font-data-tabular text-data-tabular">Motosiklet (34 AB 123)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="font-data-tabular text-data-tabular text-on-surface">Kadıköy Merkez</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Tahmini varış: 12 dk</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 text-outline hover:text-primary rounded transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-label-sm text-label-sm font-bold">HT</div>
+<div>
+<div class="font-data-tabular text-data-tabular text-on-surface">Hilmi Tokatlı</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">ID: FL-1892</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant">
+                                            Müsait
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+<span class="font-data-tabular text-data-tabular">Panelvan (34 CD 456)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="font-data-tabular text-data-tabular text-on-surface">Depo (Ataşehir)</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Bekleme: 45 dk</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 text-outline hover:text-primary rounded transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden shrink-0">
+<img alt="Courier Portrait" class="w-full h-full object-cover" data-alt="close up portrait of a young male courier wearing a dark cap and jacket smiling subtly outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF3aMlTXdnnGB5RjDg8bJvzVvVRtxrgPfV59bnXX49MpgnZCLSxxTXWN5hXIgjo-9UaepJ_wIFErp-uHviW5rxE8FkxrMxF0CKq23BLtyCjI7JctDuP0vlsY51fnTF_P0uH31CxLbiMoj4IYcn8so9BIBJNUkyPnDOxrgj9Y5eYirHcdZ0l55_xZqayvG3VxC26X0LfI69zgr2rA1BMZqnLABqqrz3nI0KfmiplR1Cx8WXj4bBy57MOVedlN75O2s8uiyUcf0873U"/>
+</div>
+<div>
+<div class="font-data-tabular text-data-tabular text-on-surface">Yusuf Menekşe</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">ID: FL-3310</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container">
+                                            Görevde
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">two_wheeler</span>
+<span class="font-data-tabular text-data-tabular">Elektrikli Bisiklet</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="font-data-tabular text-data-tabular text-on-surface">Beşiktaş</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Teslimat noktasında</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1.5 text-outline hover:text-primary rounded transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-error-container/20">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error font-label-sm text-label-sm font-bold">AE</div>
+<div>
+<div class="font-data-tabular text-data-tabular text-on-surface">Ayşe Erdem</div>
+<div class="font-body-md text-[12px] text-error">Araç Arızası</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-error-container text-error border border-error/30">
+                                            Sorun Bildirildi
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">electric_car</span>
+<span class="font-data-tabular text-data-tabular">Minivan (34 EE 789)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="font-data-tabular text-data-tabular text-on-surface">Şişli Otoyolu</div>
+<div class="font-body-md text-[12px] text-on-surface-variant">Destek yolda</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-surface-container text-on-surface font-label-sm text-label-sm rounded hover:bg-surface-variant transition-colors border border-outline-variant">
+                                            Detay
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-surface-variant flex items-center justify-between bg-surface-bright mt-auto">
+<span class="font-body-md text-[12px] text-on-surface-variant">Showing 4 of 142 couriers</span>
+<div class="flex gap-1">
+<button class="p-1 rounded text-outline hover:bg-surface-container disabled:opacity-50"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-1 rounded text-primary hover:bg-primary-fixed"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Map / Dispatch View (1/3 width on lg) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-variant flex flex-col overflow-hidden h-[600px] lg:h-auto">
+<div class="px-6 py-4 border-b border-surface-variant flex justify-between items-center bg-surface-bright z-10">
+<h2 class="font-h3 text-h3 text-on-surface">Bölge Yoğunluğu</h2>
+<button class="p-1.5 text-outline hover:text-primary rounded transition-colors"><span class="material-symbols-outlined text-sm">fullscreen</span></button>
+</div>
+<!-- Faux Map Area -->
+<div class="relative flex-1 bg-surface-container-low overflow-hidden group cursor-crosshair">
+<!-- Simulated Map Background -->
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=80')] bg-cover bg-center opacity-40 grayscale" data-alt="overhead satellite view of a dense urban city grid with roads and buildings in monochrome gray tones" data-location="Istanbul"></div>
+<!-- Map Overlay Gradient for depth -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<!-- Markers -->
+<div class="absolute top-[30%] left-[40%] transform -translate-x-1/2 -translate-y-1/2">
+<div class="relative">
+<div class="w-4 h-4 bg-secondary rounded-full border-2 border-white shadow-md z-10 relative"></div>
+<div class="absolute inset-0 bg-secondary rounded-full animate-ping opacity-50"></div>
+</div>
+</div>
+<div class="absolute top-[60%] left-[65%] transform -translate-x-1/2 -translate-y-1/2">
+<div class="relative">
+<div class="w-4 h-4 bg-secondary rounded-full border-2 border-white shadow-md z-10 relative"></div>
+</div>
+</div>
+<div class="absolute top-[45%] left-[25%] transform -translate-x-1/2 -translate-y-1/2">
+<div class="relative">
+<div class="w-4 h-4 bg-error rounded-full border-2 border-white shadow-md z-10 relative"></div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-surface-container-lowest px-2 py-1 rounded shadow text-[10px] font-bold text-error whitespace-nowrap">Araç Arızası</div>
+</div>
+</div>
+<!-- Floating Action over map -->
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<button class="w-8 h-8 bg-surface-container-lowest rounded-full shadow-md flex items-center justify-center text-on-surface hover:text-primary transition-colors border border-surface-variant"><span class="material-symbols-outlined text-[18px]">add</span></button>
+<button class="w-8 h-8 bg-surface-container-lowest rounded-full shadow-md flex items-center justify-center text-on-surface hover:text-primary transition-colors border border-surface-variant"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+</div>
+</div>
+<!-- Map Legend / Quick Stats -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-surface-variant z-10">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm text-on-surface-variant">BÖLGE: MARMARA (MERKEZ)</span>
+<span class="font-body-md text-[12px] text-secondary font-medium">Yoğunluk: Orta</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-body-md text-on-surface">Görevde (Hareketli)</span>
+</div>
+<span class="font-data-tabular text-data-tabular font-medium">84</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-body-md text-on-surface">Beklemede / Müsait</span>
+</div>
+<span class="font-data-tabular text-data-tabular font-medium">28</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
